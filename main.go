@@ -11,8 +11,6 @@ import (
 
 var prog = filepath.Base(os.Args[0])
 
-var loaders = map[string]string{}
-
 func main() {
 	log.SetFlags(0)
 	log.SetPrefix(prog + ": ")
