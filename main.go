@@ -42,25 +42,6 @@ func main() {
 	}
 	args := os.Args
 	args[0] = bin
-
-	if len(args) >= 2 {
-		switch args[1] {
-		case "test", "run":
-			var loader string
-			switch arch {
-			case "amd64p32":
-				loader = "sel_ldr_x86_64"
-			case "386":
-				loader = "sel_ldr_x86_32"
-			default:
-				log.Fatalf("no NaCl loader for architecture: %v", arch)
-			}
-			args = append(args, "")
-			copy(args[2+1:], args[2:])
-			args[2] = "-exec=" + loader
-		}
-	}
-
 	if err := syscall.Exec(bin, args, os.Environ()); err != nil {
 		log.Fatal(err)
 	}
